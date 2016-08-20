@@ -4,7 +4,7 @@
 	} else {
 		root.MP = factory(root.b);
 	}
-}(this, function(b) {
+}(this, function(__global) {
 	var QuotedString = /"(?:\.|(\\\")|[^\""\n])*"|'(?:\.|(\\\')|[^\''\n])*'/g, //引号字符串
 		$NULL = null,
 		$UNDEFINED,
@@ -177,8 +177,8 @@
 
 							var exp_fun = (
 								Key_Getter_Factory_Cache[exp_pattern] ||
-								(Key_Getter_Factory_Cache[exp_pattern] = new Function("matchs,__context," + PLA, "return function(__vm){return " + exp_pattern + "}"))
-							)(exp_matchs, context, PLA_Handle);
+								(Key_Getter_Factory_Cache[exp_pattern] = new Function("matchs,__context,__global," + PLA, "return function(__vm){return " + exp_pattern + "}"))
+							)(exp_matchs, context, __global, PLA_Handle);
 
 							res.push(exp_fun);
 
