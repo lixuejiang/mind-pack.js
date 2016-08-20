@@ -215,7 +215,7 @@
 			var his_paths = [];
 			for (var i = 0, len = paths.length; i < len; i += 1) {
 				path = paths[i];
-				if (!$.isS(path)) {
+				if ($.isF(path)) {
 					path = path(self)
 				}
 				if (i === len - 1) {
@@ -229,7 +229,10 @@
 				} else {
 					if (!res[path]) {
 						// 整数型的属性默认使用数组来进行创建
-						res = res[path] = /^[0-9]+$/.test(path) ? [] : {}
+						var new_path = paths[i + 1];
+						$.isS(new_path) || (new_path = new_path(self));
+						paths[i + 1] = [new_path];
+						res = res[path] = /^[0-9]+$/.test(new_path) ? [] : {}
 					} else {
 						res = res[path]
 						if (res && res.T === CTK) {
